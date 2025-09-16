@@ -1,13 +1,61 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form
+      [formGroup]="registerForm">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <app-input
+              type="text"
+              label="Name"
+              placeholder="Jane"
+              [control]="name"
+              ></app-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <app-input
+              type="text"
+              label="Last name"
+              placeholder="Doe"
+              [control]="lastName"
+              ></app-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <app-input
+              type="email"
+              label="Email"
+              placeholder="jane@doe.com"
+              [control]="email"
+              ></app-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <app-input
+              type="password"
+              label="Password"
+              placeholder="**************"
+              [control]="password"
+              ></app-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <app-button
+              type="submit"
+              color="dark"
+              [disabled]="registerForm.invalid"
+              value="Login"
+              ></app-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
