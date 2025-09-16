@@ -17,6 +17,7 @@ export class User {
     try {
       const uid = await this.authSrv.register(user.email, user.password);
       await this.querySrv.set("users", uid, {
+        uid,
         name: user.name,
         lastName: user.lastName,
       });

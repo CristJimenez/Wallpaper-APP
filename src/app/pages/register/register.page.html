@@ -2,7 +2,8 @@
   <ion-card>
     <ion-card-content>
       <form
-      [formGroup]="registerForm">
+      [formGroup]="registerForm"
+      (ngSubmit)="doRegister()">
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -46,11 +47,16 @@
           </ion-row>
           <ion-row>
             <ion-col>
+              <a [routerLink]="['/']">Login</a>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
               <app-button
               type="submit"
               color="dark"
               [disabled]="registerForm.invalid"
-              value="Login"
+              value="Register"
               ></app-button>
             </ion-col>
           </ion-row>

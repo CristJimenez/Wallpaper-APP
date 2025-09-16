@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/shared/services/user/user';
 
 @Component({
@@ -18,6 +19,7 @@ export class RegisterPage implements OnInit {
 
   constructor(
     private userSrv: User,
+    private readonly router: Router,
   ) { }
 
   ngOnInit() {
@@ -26,6 +28,8 @@ export class RegisterPage implements OnInit {
 
   public async doRegister() {
     await this.userSrv.create(this.registerForm.value);
+    this.registerForm.reset();
+    this.router.navigate(['/']);
   }
 
   public initForm() {
