@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/shared/services/user/user';
 
 @Component({
   selector: 'app-register',
@@ -15,10 +16,16 @@ export class RegisterPage implements OnInit {
   public password!: FormControl;
   public registerForm!: FormGroup;
 
-  constructor() { }
+  constructor(
+    private userSrv: User,
+  ) { }
 
   ngOnInit() {
     this.initForm()
+  }
+
+  public async doRegister() {
+    await this.userSrv.create(this.registerForm.value);
   }
 
   public initForm() {

@@ -12,13 +12,15 @@ export class Auth {
 
   async register(correo: string, password: string) {
     try {
-      await createUserWithEmailAndPassword(
+      const resp = await createUserWithEmailAndPassword(
         this.afb,
         correo,
         password,
       );
+      return resp.user.uid;
     } catch (error) {
       console.log(error);
+      return '';
     }
   }
 
