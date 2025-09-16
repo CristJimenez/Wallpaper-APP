@@ -9,8 +9,10 @@ import { environment } from 'src/environments/environment';
 import { Auth } from './providers/auth/auth';
 import { Query } from './providers/query/query';
 import { File } from './providers/file/file';
+import { NativeToast } from './providers/nativeToast/native-toast';
+import { Capacitor } from '@capacitor/core';
 
-const providers = [ Auth, Query, File ];
+const providers = [ Auth, Query, File, NativeToast ];
 
 @NgModule({
   declarations: [],
@@ -24,4 +26,12 @@ const providers = [ Auth, Query, File ];
     ...providers
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+  
+  constructor(private readonly fileSrv: File) {
+    if (Capacitor.isNativePlatform()) {
+      this.fileSrv.requestPermissions();
+    }
+  }
+
+}
