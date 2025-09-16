@@ -8,8 +8,9 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { Auth } from './providers/auth/auth';
 import { Query } from './providers/query/query';
+import { File } from './providers/file/file';
 
-const providers = [ Auth, Query ];
+const providers = [ Auth, Query, File ];
 
 @NgModule({
   declarations: [],
