@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { File } from 'src/app/core/providers/file/file';
+import { User } from 'src/app/shared/services/user/user';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  public image = {};
+
+  constructor(
+    private readonly fileSrv: File,
+    private userSrv: User,
+    private readonly router: Router,
+  ) { }
 
   ngOnInit() {
+  }
+
+  public async pickImage() {
+    this.image = await this.fileSrv.pickImage();
+  }
+
+  public async logOut() {
+    await this.userSrv.logOut()
+    this.router.navigate(['/']);
   }
 
 }

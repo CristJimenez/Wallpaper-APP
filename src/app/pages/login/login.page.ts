@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'src/app/shared/services/user/user';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +15,18 @@ export class LoginPage implements OnInit {
   public password!: FormControl;
   public loginForm!: FormGroup;
 
-  constructor() { }
+  constructor(
+    private userSrv: User,
+    private readonly router: Router
+  ) { }
 
   ngOnInit() {
     this.initForm();
+  }
+
+  public async logIn() {
+    await this.userSrv.logIn(this.email.value, this.password.value);
+    this.router.navigate(['/home']);
   }
 
   public initForm() {
