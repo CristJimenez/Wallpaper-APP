@@ -21,5 +21,7 @@
       </ion-row>
     </ion-grid>
   </ion-toolbar>
-  <pre>{{ image | json }}</pre>
+  @if(img) {
+    <img [src]="img">
+  }
 </ion-content>

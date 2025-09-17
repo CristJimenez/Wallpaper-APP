@@ -14,6 +14,7 @@ import { User } from 'src/app/shared/services/user/user';
 export class HomePage implements OnInit {
 
   public image!: IImage;
+  public img: string = '';
 
   constructor(
     private readonly fileSrv: File,
@@ -27,12 +28,13 @@ export class HomePage implements OnInit {
 
   public async pickImage() {
     this.image = await this.fileSrv.pickImage();
-    await this.uploaderSrv.upload(
+    const path = await this.uploaderSrv.upload(
       "images",
-      this.image.name,
+      `${Date.now()}-${this.image.name}`,
       this.image.mimeType,
       this.image.data
     );
+    this.img = await this.uploaderSrv.getUrl("images", path);
   }
 
   public async logOut() {
