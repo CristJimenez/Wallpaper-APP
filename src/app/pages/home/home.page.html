@@ -12,7 +12,7 @@
       <ion-row>
         @for (img of imgs; track $index) {
           <ion-col size="6">
-            <ion-card (click)="openActions()">
+            <ion-card class="ion-padding" (click)="openActions()">
               <img [src]="img">
             </ion-card>
           </ion-col>
