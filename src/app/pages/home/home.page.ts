@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonModal } from '@ionic/angular';
 import { File } from 'src/app/core/providers/file/file';
 import { Uploader } from 'src/app/core/providers/uploader/uploader';
 import { IImage } from 'src/app/interfaces/image.interface';
@@ -13,8 +14,11 @@ import { User } from 'src/app/shared/services/user/user';
 })
 export class HomePage implements OnInit {
 
+  @ViewChild('optionsModal') optionsModal!: IonModal;
+
   public image!: IImage;
-  public img: string = '';
+  public imgs: string[] = [];
+  public groupedImgs: string[][] = [];
 
   constructor(
     private readonly fileSrv: File,
@@ -23,7 +27,10 @@ export class HomePage implements OnInit {
     private readonly uploaderSrv: Uploader,
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  public openModal() {
+    this.optionsModal.present();
   }
 
   public async pickImage() {
@@ -34,7 +41,8 @@ export class HomePage implements OnInit {
       this.image.mimeType,
       this.image.data
     );
-    this.img = await this.uploaderSrv.getUrl("images", path);
+    const imge = await this.uploaderSrv.getUrl("images", path);
+    this.imgs = [imge, ...this.imgs];
   }
 
   public async logOut() {

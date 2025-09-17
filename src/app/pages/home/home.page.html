@@ -1,27 +1,52 @@
-<ion-content>
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="dark">
+    <div class="ion-padding"></div>
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+    <ion-title> My Wallpaper </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  @if (imgs) {
     <ion-grid>
       <ion-row>
-        <ion-col>
-          <app-button
-          type="button"
-          color="success"
-          value="Pick Image"
-          (click)="pickImage()"
-          ></app-button>
-        </ion-col>
-        <ion-col>
-          <app-button
-          type="button"
-          color="danger"
-          value="Log Out"
-          (click)="logOut()"
-          ></app-button>
-        </ion-col>
+        @for (img of imgs; track $index) {
+          <ion-col size="6">
+            <ion-card (click)="openModal()">
+              <img [src]="img">
+            </ion-card>
+          </ion-col>
+        }
       </ion-row>
     </ion-grid>
-  </ion-toolbar>
-  @if(img) {
-    <img [src]="img">
   }
+
+  <ion-modal #optionsModal [initialBreakpoint]="0.2" [breakpoints]="[0, 1]">
+    <ng-template>
+      <div>
+        <app-button
+        type="button"
+        color="light"
+        value="Set Home"
+        ></app-button>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="dark">
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button (click)="logOut()">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="pickImage()">
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+  </ion-fab>
 </ion-content>
