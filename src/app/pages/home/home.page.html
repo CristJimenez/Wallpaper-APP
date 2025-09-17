@@ -1,17 +1,25 @@
 <ion-content>
   <ion-toolbar>
-    <app-button
-    type="button"
-    color="danger"
-    value="Log Out"
-    (click)="logOut()"
-    ></app-button>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <app-button
+          type="button"
+          color="success"
+          value="Pick Image"
+          (click)="pickImage()"
+          ></app-button>
+        </ion-col>
+        <ion-col>
+          <app-button
+          type="button"
+          color="danger"
+          value="Log Out"
+          (click)="logOut()"
+          ></app-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
-  <app-button
-  type="button"
-  color="success"
-  value="Pick Image"
-  (click)="pickImage()"
-  ></app-button>
   <pre>{{ image | json }}</pre>
 </ion-content>

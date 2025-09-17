@@ -11,14 +11,13 @@ import { Query } from './providers/query/query';
 import { File } from './providers/file/file';
 import { NativeToast } from './providers/nativeToast/native-toast';
 import { Capacitor } from '@capacitor/core';
+import { Uploader } from './providers/uploader/uploader';
 
-const providers = [ Auth, Query, File, NativeToast ];
+const providers = [ Auth, Query, File, NativeToast, Uploader ];
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ],
+  imports: [ CommonModule ],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG)),
     provideAuth(() => getAuth()),
