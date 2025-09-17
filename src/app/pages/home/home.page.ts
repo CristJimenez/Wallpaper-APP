@@ -4,6 +4,7 @@ import { IonModal } from '@ionic/angular';
 import { File } from 'src/app/core/providers/file/file';
 import { Uploader } from 'src/app/core/providers/uploader/uploader';
 import { IImage } from 'src/app/interfaces/image.interface';
+import { ActionSheet } from 'src/app/shared/providers/actionSheet/action-sheet';
 import { User } from 'src/app/shared/services/user/user';
 
 @Component({
@@ -14,8 +15,6 @@ import { User } from 'src/app/shared/services/user/user';
 })
 export class HomePage implements OnInit {
 
-  @ViewChild('optionsModal') optionsModal!: IonModal;
-
   public image!: IImage;
   public imgs: string[] = [];
   public groupedImgs: string[][] = [];
@@ -25,12 +24,26 @@ export class HomePage implements OnInit {
     private userSrv: User,
     private readonly router: Router,
     private readonly uploaderSrv: Uploader,
+    private actionSheetSrv: ActionSheet
   ) { }
 
   ngOnInit() {}
 
-  public openModal() {
-    this.optionsModal.present();
+  public openActions() {
+    this.actionSheetSrv.present('Actions', [
+      {
+        text: 'Lock screan',
+        handler: () => console.log('Putting lock screan...'),
+      },
+      {
+        text: 'Home screan',
+        handler: () => console.log('Putting home screan...'),
+      },
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+    ]);
   }
 
   public async pickImage() {

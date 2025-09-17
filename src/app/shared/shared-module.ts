@@ -6,10 +6,11 @@ import { IonicModule } from "@ionic/angular";
 import { ButtonComponent } from './components/button/button.component';
 import { User } from './services/user/user';
 import { RouterModule } from '@angular/router';
+import { ActionSheet } from './providers/actionSheet/action-sheet';
 
 const modules = [ CommonModule, FormsModule, ReactiveFormsModule, IonicModule, RouterModule ];
 const components = [ InputComponent, ButtonComponent ];
-const providers = [ User ];
+const providers = [ User, ActionSheet ];
 
 @NgModule({
   declarations: [ ...components ],

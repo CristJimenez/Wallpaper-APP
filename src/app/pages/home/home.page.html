@@ -12,7 +12,7 @@
       <ion-row>
         @for (img of imgs; track $index) {
           <ion-col size="6">
-            <ion-card (click)="openModal()">
+            <ion-card (click)="openActions()">
               <img [src]="img">
             </ion-card>
           </ion-col>
@@ -20,18 +20,6 @@
       </ion-row>
     </ion-grid>
   }
-
-  <ion-modal #optionsModal [initialBreakpoint]="0.2" [breakpoints]="[0, 1]">
-    <ng-template>
-      <div>
-        <app-button
-        type="button"
-        color="light"
-        value="Set Home"
-        ></app-button>
-      </div>
-    </ng-template>
-  </ion-modal>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button color="dark">
