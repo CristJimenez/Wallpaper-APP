@@ -21,6 +21,7 @@ export class User {
         name: user.name,
         lastName: user.lastName,
       });
+      await this.logOut();
     } catch (error) {
       console.log(error);
     }

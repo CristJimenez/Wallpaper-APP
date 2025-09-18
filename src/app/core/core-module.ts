@@ -12,8 +12,9 @@ import { File } from './providers/file/file';
 import { NativeToast } from './providers/nativeToast/native-toast';
 import { Capacitor } from '@capacitor/core';
 import { Uploader } from './providers/uploader/uploader';
+import { Loading } from './providers/loading/loading';
 
-const providers = [ Auth, Query, File, NativeToast, Uploader ];
+const providers = [ Auth, Query, File, NativeToast, Uploader, Loading ];
 
 @NgModule({
   declarations: [],

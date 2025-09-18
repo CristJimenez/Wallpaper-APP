@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonModal } from '@ionic/angular';
 import { File } from 'src/app/core/providers/file/file';
+import { Loading } from 'src/app/core/providers/loading/loading';
 import { Uploader } from 'src/app/core/providers/uploader/uploader';
 import { IImage } from 'src/app/interfaces/image.interface';
 import { ActionSheet } from 'src/app/shared/providers/actionSheet/action-sheet';
@@ -24,7 +24,8 @@ export class HomePage implements OnInit {
     private userSrv: User,
     private readonly router: Router,
     private readonly uploaderSrv: Uploader,
-    private actionSheetSrv: ActionSheet
+    private actionSheetSrv: ActionSheet,
+    private loadingSrv: Loading
   ) { }
 
   ngOnInit() {}
@@ -71,6 +72,9 @@ export class HomePage implements OnInit {
   }
 
   public async pickImage() {
+    await this.loadingSrv.present({
+      msg: 'Please wait...'
+    });
     this.image = await this.fileSrv.pickImage();
     const path = await this.uploaderSrv.upload(
       "images",
@@ -79,11 +83,16 @@ export class HomePage implements OnInit {
       this.image.data
     );
     const imge = await this.uploaderSrv.getUrl("images", path);
-    this.imgs = [imge, ...this.imgs];
+    this.imgs = [...this.imgs, imge];
+    await this.loadingSrv.dimiss();
   }
 
   public async logOut() {
+    await this.loadingSrv.present({
+      msg: 'Please wait...'
+    });
     await this.userSrv.logOut()
+    await this.loadingSrv.dimiss();
     this.router.navigate(['/']);
   }
 
