@@ -29,6 +29,26 @@ export class HomePage implements OnInit {
 
   ngOnInit() {}
 
+  public onButtonClick(action: string) {
+    switch(action) {
+
+      case 'logout':
+        this.logOut();
+        break;
+      
+      case 'add':
+        this.pickImage();
+        break;
+      
+      case 'profile':
+        this.goToProfile();
+        break;
+
+      default:
+        console.warn('Action not found: ', action);
+    }
+  }
+
   public openActions() {
     this.actionSheetSrv.present('Actions', [
       {
@@ -44,6 +64,10 @@ export class HomePage implements OnInit {
         role: 'cancel'
       },
     ]);
+  }
+
+  public goToProfile() {
+    console.log("Go to profile...");
   }
 
   public async pickImage() {

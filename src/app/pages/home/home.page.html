@@ -24,19 +24,16 @@
   }
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button color="dark">
-      <ion-icon name="chevron-up-circle"></ion-icon>
-    </ion-fab-button>
-      <ion-fab-list side="top">
-        <ion-fab-button (click)="logOut()">
-          <ion-icon name="log-out-outline"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button (click)="pickImage()">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-fab-button>
-      </ion-fab-list>
+    <app-floating-button
+    color="dark"
+    icon="chevron-up-circle"
+    side="top"
+    [buttons]="[
+      { icon: 'log-out-outline', action: 'logout' },
+      { icon: 'add-circle-outline', action: 'add' },
+      { icon: 'person-circle-outline', action: 'profile' },
+    ]"
+    (buttonClick)="onButtonClick($event)"
+    ></app-floating-button>
   </ion-fab>
 </ion-content>
