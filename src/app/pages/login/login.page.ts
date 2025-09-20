@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Loading } from 'src/app/core/providers/loading/loading';
+import { Translate } from 'src/app/core/providers/translate/translate';
 import { User } from 'src/app/shared/services/user/user';
 
 @Component({
@@ -12,6 +13,8 @@ import { User } from 'src/app/shared/services/user/user';
 })
 export class LoginPage implements OnInit {
 
+  public language = false;
+
   public email!: FormControl;
   public password!: FormControl;
   public loginForm!: FormGroup;
@@ -20,10 +23,16 @@ export class LoginPage implements OnInit {
     private userSrv: User,
     private readonly router: Router,
     private loadingSrv: Loading,
+    private translateSrv: Translate,
   ) { }
 
   ngOnInit() {
     this.initForm();
+  }
+
+  public changeLang(state: boolean) {
+    const lang = state ? 'es' : 'en';
+    this.translateSrv.useLang(lang);
   }
 
   public async logIn() {

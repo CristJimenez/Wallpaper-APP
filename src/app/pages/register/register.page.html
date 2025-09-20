@@ -9,7 +9,7 @@
             <ion-col>
               <app-input
               type="text"
-              label="Name"
+              [label]="'REGISTER.NAME' | translate"
               placeholder="Jane"
               [control]="name"
               ></app-input>
@@ -17,7 +17,7 @@
             <ion-col>
               <app-input
               type="text"
-              label="Last name"
+              [label]="'REGISTER.LASTNAME' | translate"
               placeholder="Doe"
               [control]="lastName"
               ></app-input>
@@ -27,7 +27,7 @@
             <ion-col>
               <app-input
               type="email"
-              label="Email"
+              [label]="'REGISTER.EMAIL' | translate"
               placeholder="jane@doe.com"
               [control]="email"
               ></app-input>
@@ -37,7 +37,7 @@
             <ion-col>
               <app-input
               type="password"
-              label="Password"
+              [label]="'REGISTER.PASSWORD' | translate"
               placeholder="**************"
               [control]="password"
               ></app-input>
@@ -47,7 +47,7 @@
             <ion-col>
               <app-link
               link="/login"
-              value="Already registered?"
+              [value]="'REGISTER.' | translate"
               ></app-link>
             </ion-col>
           </ion-row>
@@ -57,7 +57,7 @@
               type="submit"
               color="dark"
               [disabled]="registerForm.invalid"
-              value="Register"
+              [value]="'REGISTER.BUTTON' | translate"
               ></app-button>
             </ion-col>
           </ion-row>

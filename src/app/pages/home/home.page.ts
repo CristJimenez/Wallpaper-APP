@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { File } from 'src/app/core/providers/file/file';
 import { Loading } from 'src/app/core/providers/loading/loading';
+import { Translate } from 'src/app/core/providers/translate/translate';
 import { Uploader } from 'src/app/core/providers/uploader/uploader';
 import { IImage } from 'src/app/interfaces/image.interface';
 import { ActionSheet } from 'src/app/shared/providers/actionSheet/action-sheet';
@@ -25,7 +26,8 @@ export class HomePage implements OnInit {
     private readonly router: Router,
     private readonly uploaderSrv: Uploader,
     private actionSheetSrv: ActionSheet,
-    private loadingSrv: Loading
+    private loadingSrv: Loading,
+    private translateSrv: Translate
   ) { }
 
   ngOnInit() {}
@@ -51,17 +53,19 @@ export class HomePage implements OnInit {
   }
 
   public openActions() {
-    this.actionSheetSrv.present('Actions', [
+    this.actionSheetSrv.present( 
+      this.translateSrv.instant('HOME.ACTIONS'), 
+      [
       {
-        text: 'Lock screan',
+        text: this.translateSrv.instant('HOME.LOCKSCREAN'),
         handler: () => console.log('Putting lock screan...'),
       },
       {
-        text: 'Home screan',
+        text: this.translateSrv.instant('HOME.HOMESCREAN'),
         handler: () => console.log('Putting home screan...'),
       },
       {
-        text: 'Cancel',
+        text: this.translateSrv.instant('HOME.CANCEL'),
         role: 'cancel'
       },
     ]);
@@ -83,7 +87,7 @@ export class HomePage implements OnInit {
       this.image.data
     );
     const imge = await this.uploaderSrv.getUrl("images", path);
-    this.imgs = [...this.imgs, imge];
+    this.imgs = [imge, ...this.imgs];
     await this.loadingSrv.dimiss();
   }
 

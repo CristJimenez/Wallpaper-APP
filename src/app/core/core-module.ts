@@ -13,12 +13,29 @@ import { NativeToast } from './providers/nativeToast/native-toast';
 import { Capacitor } from '@capacitor/core';
 import { Uploader } from './providers/uploader/uploader';
 import { Loading } from './providers/loading/loading';
+import { Translate } from './providers/translate/translate';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-const providers = [ Auth, Query, File, NativeToast, Uploader, Loading ];
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+const providers = [ Auth, Query, File, NativeToast, Uploader, Loading, Translate ];
 
 @NgModule({
   declarations: [],
-  imports: [ CommonModule ],
+  imports: [ CommonModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      }
+    }),
+   ],
+  exports: [TranslateModule],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG)),
     provideAuth(() => getAuth()),

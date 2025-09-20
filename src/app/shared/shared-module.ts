@@ -11,8 +11,9 @@ import { ToggleTranslateComponent } from './components/toggleTranslate/toggle-tr
 import { LinkComponent } from './components/link/link.component';
 import { CardComponent } from './components/card/card.component';
 import { FloatingButtonComponent } from './components/floatingButton/floating-button.component';
+import { TranslateModule } from '@ngx-translate/core';
 
-const modules = [ CommonModule, FormsModule, ReactiveFormsModule, IonicModule, RouterModule ];
+const modules = [ CommonModule, FormsModule, ReactiveFormsModule, IonicModule, RouterModule, TranslateModule ];
 const components = [ InputComponent, ButtonComponent, ToggleTranslateComponent, LinkComponent, CardComponent, FloatingButtonComponent ];
 const providers = [ User, ActionSheet ];
 
