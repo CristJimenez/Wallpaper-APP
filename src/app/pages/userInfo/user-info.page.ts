@@ -1,55 +1,64 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Loading } from 'src/app/core/providers/loading/loading';
 import { Translate } from 'src/app/core/providers/translate/translate';
 import { User } from 'src/app/shared/services/user/user';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  selector: 'app-user-info',
+  templateUrl: './user-info.page.html',
+  styleUrls: ['./user-info.page.scss'],
   standalone: false,
 })
-export class RegisterPage implements OnInit {
+export class UserInfoPage implements OnInit {
+
+  public language = false;
+  public uid!: string;
 
   public name!: FormControl;
   public lastName!: FormControl;
-  public email!: FormControl;
-  public password!: FormControl;
-  public registerForm!: FormGroup;
+  public userForm!: FormGroup;
 
   constructor(
-    private userSrv: User,
-    private readonly router: Router,
-    private loadingSrv: Loading,
     private translateSrv: Translate,
+    private userSrv: User,
+    private loadingSrv: Loading,
   ) { }
 
   ngOnInit() {
-    this.initForm()
+    this.initForm();
+    this.uid = localStorage.getItem("uid") || '';
+    this.loaderInfo();
   }
 
-  public async doRegister() {
+  public async update() {
     await this.loadingSrv.present({
       msg: this.translateSrv.instant('TOAST.MESSAGE'),
     });
-    await this.userSrv.create(this.registerForm.value);
-    this.registerForm.reset();
+    await this.userSrv.update(this.uid, this.userForm.value);
     await this.loadingSrv.dimiss();
-    this.router.navigate(['/']);
+  }
+  
+  public async loaderInfo() {
+    const userInfo = await this.userSrv.getUserInfo(this.uid);
+    this.userForm.patchValue({
+      name: userInfo['name'] || '',
+      lastName: userInfo['lastName'] || '',
+    });
+    console.log(this.userForm.value);
+  }
+
+  public changeLang(state: boolean) {
+    const lang = state ? 'es' : 'en';
+    this.translateSrv.useLang(lang);
   }
 
   public initForm() {
     this.name = new FormControl('', [Validators.required]);
     this.lastName = new FormControl('', [Validators.required]);
-    this.email = new FormControl('', [Validators.required, Validators.email]);
-    this.password = new FormControl('', [Validators.required, Validators.minLength(5)]);
-    this.registerForm = new FormGroup({
+    this.userForm = new FormGroup({
       name: this.name,
       lastName: this.lastName,
-      email: this.email,
-      password: this.password,
     });
   }
 

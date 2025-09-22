@@ -72,12 +72,12 @@ export class HomePage implements OnInit {
   }
 
   public goToProfile() {
-    console.log("Go to profile...");
+    this.router.navigate(['/user-info']);
   }
 
   public async pickImage() {
     await this.loadingSrv.present({
-      msg: 'Please wait...'
+      msg: this.translateSrv.instant('TOAST.MESSAGE'),
     });
     this.image = await this.fileSrv.pickImage();
     const path = await this.uploaderSrv.upload(
@@ -93,11 +93,12 @@ export class HomePage implements OnInit {
 
   public async logOut() {
     await this.loadingSrv.present({
-      msg: 'Please wait...'
+      msg: this.translateSrv.instant('TOAST.MESSAGE'),
     });
     await this.userSrv.logOut()
     await this.loadingSrv.dimiss();
     this.router.navigate(['/']);
+    localStorage.removeItem("uid");
   }
 
 }

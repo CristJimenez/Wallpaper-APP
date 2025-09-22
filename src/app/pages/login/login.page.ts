@@ -37,11 +37,13 @@ export class LoginPage implements OnInit {
 
   public async logIn() {
     await this.loadingSrv.present({
-      msg: 'Please wait...'
+      msg: this.translateSrv.instant('TOAST.MESSAGE'),
     });
-    await this.userSrv.logIn(this.email.value, this.password.value);
+    const uid = await this.userSrv.logIn(this.email.value, this.password.value);
     await this.loadingSrv.dimiss();
+    localStorage.setItem("uid", uid);
     this.router.navigate(['/home']);
+    this.loginForm.reset();
   }
 
   public initForm() {

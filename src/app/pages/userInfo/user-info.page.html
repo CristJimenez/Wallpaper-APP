@@ -2,52 +2,43 @@
   <ion-card>
     <ion-card-content>
       <form
-      [formGroup]="registerForm"
-      (ngSubmit)="doRegister()">
+      [formGroup]="userForm">
         <ion-grid>
           <ion-row>
             <ion-col>
               <app-input
               type="text"
-              [label]="'REGISTER.NAME' | translate"
+              [label]="'USER.NAME' | translate"
               placeholder="Jane"
               [control]="name"
               ></app-input>
             </ion-col>
+          </ion-row>
+          <ion-row>
             <ion-col>
               <app-input
               type="text"
-              [label]="'REGISTER.LASTNAME' | translate"
+              [label]="'USER.LASTNAME' | translate"
               placeholder="Doe"
               [control]="lastName"
               ></app-input>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>
-              <app-input
-              type="email"
-              [label]="'REGISTER.EMAIL' | translate"
-              placeholder="jane@doe.com"
-              [control]="email"
-              ></app-input>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <app-input
-              type="password"
-              [label]="'REGISTER.PASSWORD' | translate"
-              placeholder="**************"
-              [control]="password"
-              ></app-input>
+            <ion-col size="4">
+              <app-toggle-translate
+              [(value)]="language"
+              left="🇺🇸"
+              rigth="🇨🇴"
+              (valueChange)="changeLang($event)"
+              ></app-toggle-translate>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
               <app-link
-              link="/login"
-              [value]="'REGISTER.LINK' | translate"
+              link="/home"
+              value="Regresar"
               ></app-link>
             </ion-col>
           </ion-row>
@@ -56,8 +47,9 @@
               <app-button
               type="submit"
               color="dark"
-              [disabled]="registerForm.invalid"
-              [value]="'REGISTER.BUTTON' | translate"
+              [disabled]="userForm.invalid"
+              [value]="'USER.BUTTON' | translate"
+              (click)="update()"
               ></app-button>
             </ion-col>
           </ion-row>

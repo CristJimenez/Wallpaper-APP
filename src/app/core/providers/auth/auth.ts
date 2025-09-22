@@ -26,13 +26,15 @@ export class Auth {
 
   async logIn(correo: string, password: string) {
     try {
-      await signInWithEmailAndPassword(
+      const resp = await signInWithEmailAndPassword(
         this.afb,
         correo,
         password,
       );
+      return resp.user.uid;
     } catch (error) {
       console.log(error);
+      return '';
     }
   }
 

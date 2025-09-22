@@ -14,11 +14,19 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule),
+    canActivate: [AuthGuard],
+    data: {authGuardPipe: isLogged},
   },
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
+    canActivate: [AuthGuard],
+    data: {authGuardPipe: isNotLogged},
+  },
+  {
+    path: 'user-info',
+    loadChildren: () => import('./pages/userInfo/user-info.module').then( m => m.UserInfoPageModule),
     canActivate: [AuthGuard],
     data: {authGuardPipe: isNotLogged},
   },

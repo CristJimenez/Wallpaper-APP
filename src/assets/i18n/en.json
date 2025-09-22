@@ -19,5 +19,13 @@
         "LOCKSCREAN": "Lock screan",
         "HOMESCREAN": "Home screan",
         "CANCEL": "Cancel"
+    },
+    "USER": {
+        "NAME": "Name",
+        "LASTNAME": "Last name",
+        "BUTTON": "Update"
+    },
+    "TOAST": {
+        "MESSAGE": "Please wait..."
     }
 }

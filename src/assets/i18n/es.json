@@ -19,5 +19,13 @@
         "LOCKSCREAN": "Pantalla de bloqueo",
         "HOMESCREAN": "Pantalla de inicio",
         "CANCEL": "Cancelar"
+    },
+    "USER": {
+        "NAME": "Nombre",
+        "LASTNAME": "Apellido",
+        "BUTTON": "Actualizar"
+    },
+    "TOAST": {
+        "MESSAGE": "Por favor espera..."
     }
 }
