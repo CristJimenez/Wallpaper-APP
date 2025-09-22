@@ -30,7 +30,17 @@ export class HomePage implements OnInit {
     private translateSrv: Translate
   ) { }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    const uid = localStorage.getItem("uid") || '';
+
+    await this.loadingSrv.present({
+      msg: this.translateSrv.instant('TOAST.MESSAGE'),
+    });
+
+    this.imgs = await this.uploaderSrv.getUserImageUrls("images", uid);
+
+    await this.loadingSrv.dimiss();
+  }
 
   public onButtonClick(action: string) {
     switch(action) {
@@ -76,12 +86,14 @@ export class HomePage implements OnInit {
   }
 
   public async pickImage() {
+    const uid = localStorage.getItem("uid") || '';
     await this.loadingSrv.present({
       msg: this.translateSrv.instant('TOAST.MESSAGE'),
     });
     this.image = await this.fileSrv.pickImage();
     const path = await this.uploaderSrv.upload(
       "images",
+      uid,
       `${Date.now()}-${this.image.name}`,
       this.image.mimeType,
       this.image.data
