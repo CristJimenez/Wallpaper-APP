@@ -12,10 +12,11 @@ import { LinkComponent } from './components/link/link.component';
 import { CardComponent } from './components/card/card.component';
 import { FloatingButtonComponent } from './components/floatingButton/floating-button.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { Wallpaper } from './services/wallpaper/wallpaper';
 
 const modules = [ CommonModule, FormsModule, ReactiveFormsModule, IonicModule, RouterModule, TranslateModule ];
 const components = [ InputComponent, ButtonComponent, ToggleTranslateComponent, LinkComponent, CardComponent, FloatingButtonComponent ];
-const providers = [ User, ActionSheet ];
+const providers = [ User, ActionSheet, Wallpaper ];
 
 @NgModule({
   declarations: [ ...components ],

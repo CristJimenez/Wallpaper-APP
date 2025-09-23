@@ -7,6 +7,7 @@ import { Uploader } from 'src/app/core/providers/uploader/uploader';
 import { IImage } from 'src/app/interfaces/image.interface';
 import { ActionSheet } from 'src/app/shared/providers/actionSheet/action-sheet';
 import { User } from 'src/app/shared/services/user/user';
+import { Wallpaper } from 'src/app/shared/services/wallpaper/wallpaper';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,8 @@ export class HomePage implements OnInit {
     private readonly uploaderSrv: Uploader,
     private actionSheetSrv: ActionSheet,
     private loadingSrv: Loading,
-    private translateSrv: Translate
+    private translateSrv: Translate,
+    private wallpaperSrv: Wallpaper,
   ) { }
 
   async ngOnInit() {
@@ -62,23 +64,31 @@ export class HomePage implements OnInit {
     }
   }
 
-  public openActions() {
+  public openActions(imageSelected: string) {
     this.actionSheetSrv.present( 
       this.translateSrv.instant('HOME.ACTIONS'), 
       [
       {
         text: this.translateSrv.instant('HOME.LOCKSCREAN'),
-        handler: () => console.log('Putting lock screan...'),
+        handler: () => this.setLockScrean(imageSelected),
       },
       {
         text: this.translateSrv.instant('HOME.HOMESCREAN'),
-        handler: () => console.log('Putting home screan...'),
+        handler: () => this.setHomeScrean(imageSelected),
       },
       {
         text: this.translateSrv.instant('HOME.CANCEL'),
         role: 'cancel'
       },
     ]);
+  }
+
+  public async setHomeScrean(image: string) {
+    await this.wallpaperSrv.setHomeScreen(image);
+  }
+
+  public async setLockScrean(image: string) {
+    await this.wallpaperSrv.setLockScreen(image);
   }
 
   public goToProfile() {
